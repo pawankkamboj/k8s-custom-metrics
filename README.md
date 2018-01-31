@@ -4,7 +4,6 @@ We can autoscale k8s object with prometheus metrics using prometheus adaptor as 
 
 
 * Install prometheus using promethues operator
-
   Using prometheus operator to install prometheus and alertmanager, to get more info look at 
   https://github.com/coreos/prometheus-operator
 ```
