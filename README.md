@@ -5,8 +5,8 @@ We can autoscale k8s object with prometheus metrics using prometheus adaptor as 
 
 * Install prometheus using promethues operator
 
-Using prometheus operator to install prometheus and alertmanager, to get more info look at 
-https://github.com/coreos/prometheus-operator
+  Using prometheus operator to install prometheus and alertmanager, to get more info look at 
+  https://github.com/coreos/prometheus-operator
 ```
 kubectl apply -f alertmanager/
 [root@docker01 prometheus-operator]# kubectl get pods -l app=alertmanager
@@ -28,7 +28,7 @@ prometheuses.monitoring.coreos.com      CustomResourceDefinition.v1beta1.apiexte
 servicemonitors.monitoring.coreos.com   CustomResourceDefinition.v1beta1.apiextensions.k8s.io
 ```
 
-* install node-expoter
+* Install node-expoter
 ```
 kubectl apply -f node-exporter/
 [root@docker01 prometheus-operator]# kubectl get pods -n monitoring -l app=node-exporter
@@ -37,7 +37,7 @@ node-exporter-682cc   1/1       Running   0          1d
 node-exporter-z9fz6   1/1       Running   0          1d
 ```
 
-* install kube-state-metrics
+* Install kube-state-metrics
 ```
 kubectl apply -f kube-state-metrics/
 
@@ -46,9 +46,8 @@ NAME                                             READY     STATUS    RESTARTS   
 kube-state-metrics-deployment-7f758c9f4b-f28b8   1/1       Running   0          1d
 ```
 
-* install metrics servers
-
-Starting from Kubernetes 1.8, resource usage metrics, such as container CPU and memory usage, are available in Kubernetes through the Metrics API. Through the Metrics API you can get the amount of resource currently used by a given node or a given pod. This API doesn’t store the metric values, so it’s not possible for example to get the amount of resources used by a given node 10 minutes ago. it is discoverable through the same endpoint as the other Kubernetes APIs under /apis/metrics.k8s.io/ path. Metrics Server https://github.com/kubernetes-incubator/metrics-server is a cluster-wide aggregator of resource usage data. Metric server collects metrics from the Summary API, exposed by Kubelet on each node. Metrics Server registered in the main API server through Kubernetes aggregator, which was introduced in Kubernetes 1.7 and It’s supported in Kubernetes 1.7+. 
+* Install metrics servers
+  Starting from Kubernetes 1.8, resource usage metrics, such as container CPU and memory usage, are available in Kubernetes   through the Metrics API. Through the Metrics API you can get the amount of resource currently used by a given node or a given pod. This API doesn’t store the metric values, so it’s not possible for example to get the amount of resources used by a given node 10 minutes ago. it is discoverable through the same endpoint as the other Kubernetes APIs under /apis/metrics.k8s.io/ path. Metrics Server https://github.com/kubernetes-incubator/metrics-server is a cluster-wide aggregator of resource usage data. Metric server collects metrics from the Summary API, exposed by Kubelet on each node. Metrics Server registered in the main API server through Kubernetes aggregator, which was introduced in Kubernetes 1.7 and It’s supported in Kubernetes 1.7+. 
 ```
 kubectl apply -f metrics-server/
 
@@ -57,7 +56,7 @@ NAME                             READY     STATUS    RESTARTS   AGE
 metrics-server-cb4b857b9-zglxl   1/1       Running   0          1d
 ```
 
-* install k8s-prometheus-adapter for custom metrics
+* Install k8s-prometheus-adapter for custom metrics
 ```
 kubectl apply -f prometheus
 [root@docker01 prometheus-operator]# kubectl get pods -l k8s-app=prometheus-operator
@@ -65,7 +64,7 @@ NAME                                   READY     STATUS    RESTARTS   AGE
 prometheus-operator-549699ccc6-5kpzn   1/1       Running   0          1d
 ```
 
-* install example application nginx
+* Install example application nginx
 ```
 kubectl apply -f example/
 
