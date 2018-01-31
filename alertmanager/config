@@ -1,6 +1,6 @@
 global:
-    smtp_smarthost: 'smtp1.yatra.in:25'
-    smtp_from: 'linuxadmin@yatra.com'
+    smtp_smarthost: 'smtp.test.in'
+    smtp_from: 'test@test.com'
 templates:
    - '/etc/alertmanager/template/*.tmpl'
 route:
