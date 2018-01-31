@@ -1,11 +1,11 @@
 # k8s-custom-metrics
 
-We can autoscale k8s object with prometheus metrics using prometheus adaptor as aggregating API server, it provide API "custom.metrics.k8s.io/v1beta1/", you can get more info at https://github.com/DirectXMan12/k8s-prometheus-adapter
+Autoscale k8s object using prometheus metrics.
+Using prometheus adaptor as aggregating API server, it provide an API "custom.metrics.k8s.io/v1beta1/", you can get more info at https://github.com/DirectXMan12/k8s-prometheus-adapter
 
 
 * Install prometheus using promethues operator
-  Using prometheus operator to install prometheus and alertmanager, to get more info look at 
-  https://github.com/coreos/prometheus-operator
+  The Prometheus Operator for Kubernetes provides easy monitoring definitions for Kubernetes services and deployment and   management of Prometheus instances, check out more https://github.com/coreos/prometheus-operator
 ```
 kubectl apply -f alertmanager/
 [root@docker01 prometheus-operator]# kubectl get pods -l app=alertmanager
