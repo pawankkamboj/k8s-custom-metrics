@@ -59,9 +59,5 @@ spec:
   metrics:
   - type: Pods
     pods:
-      metricName: cpu_usage
-      targetAverageValue: 80m
-  - type: Pods
-    pods:
       metricName: memory_usage_bytes
-      targetAverageValue: 100Mi
+      targetAverageValue: 8000000
