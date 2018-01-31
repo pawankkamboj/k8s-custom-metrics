@@ -1,6 +1,6 @@
 # k8s-custom-metrics
 
-Using prometheus adaptor as aggregating API server, it provide API "custom.metrics.k8s.io/v1beta1/", you can get more info at https://github.com/DirectXMan12/k8s-prometheus-adapter
+We can autoscale k8s object with prometheus metrics using prometheus adaptor as aggregating API server, it provide API "custom.metrics.k8s.io/v1beta1/", you can get more info at https://github.com/DirectXMan12/k8s-prometheus-adapter
 
 
 #- install prometheus using promethues operator
