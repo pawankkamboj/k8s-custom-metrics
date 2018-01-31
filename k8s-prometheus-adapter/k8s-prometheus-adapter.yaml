@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: custom-metrics
-        image: qaregistry.yatra.com/k8s-prometheus-adapter-amd64
+        image: directxman12/k8s-prometheus-adapter:v0.1.0-centos
         args:
         - --prometheus-url=http://prometheus-k8s.default:9090
         - --metrics-relist-interval=30s
