@@ -65,6 +65,8 @@ kube-state-metrics-deployment-7f758c9f4b-f28b8   1/1       Running   0          
 [root@docker01 prometheus-operator]# kubectl get pods -n kube-system -l k8s-app=metrics-server
 NAME                             READY     STATUS    RESTARTS   AGE
 metrics-server-cb4b857b9-zglxl   1/1       Running   0          1d
+
+[root@docker01 prometheus-operator]# kubectl get --raw "/apis/metrics.k8s.io/v1beta1/"
 ```
 
 * Deploy k8s-prometheus-adapter for custom metrics
