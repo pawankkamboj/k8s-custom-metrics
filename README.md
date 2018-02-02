@@ -57,6 +57,7 @@ kube-state-metrics-deployment-7f758c9f4b-f28b8   1/1       Running   0          
 ```
 
 * Install metrics servers
+
   Starting from Kubernetes 1.8, resource usage metrics, such as container CPU and memory usage, are available in Kubernetes   through the Metrics API. Through the Metrics API you can get the amount of resource currently used by a given node or a given pod. This API doesn’t store the metric values, so it’s not possible for example to get the amount of resources used by a given node 10 minutes ago. it is discoverable through the same endpoint as the other Kubernetes APIs under /apis/metrics.k8s.io/ path. Metrics Server https://github.com/kubernetes-incubator/metrics-server is a cluster-wide aggregator of resource usage data. Metric server collects metrics from the Summary API, exposed by Kubelet on each node. Metrics Server registered in the main API server through Kubernetes aggregator, which was introduced in Kubernetes 1.7 and It’s supported in Kubernetes 1.7+. 
 ```
 kubectl apply -f metrics-server/
@@ -78,15 +79,15 @@ prometheus-operator-549699ccc6-5kpzn   1/1       Running   0          1d
 ```
 kubectl apply -f example/
 
-[root@docker01 fresco]# kubectl get pods -l app=nginx
+[root@docker01 ]# kubectl get pods -l app=nginx
 NAME                     READY     STATUS    RESTARTS   AGE
 nginx-76f467f844-64wsf   1/1       Running   0          17m
 
-[root@docker01 fresco]# kubectl get hpa nginx
+[root@docker01 ]# kubectl get hpa nginx
 NAME      REFERENCE          TARGETS          MINPODS   MAXPODS   REPLICAS   AGE
 nginx     Deployment/nginx   7766016 / 800k   1         2         1          13m
 
-[root@docker01 fresco]# kubectl get hpa nginx -o yaml
+[root@docker01 ]# kubectl get hpa nginx -o yaml
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
