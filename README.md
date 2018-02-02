@@ -21,13 +21,13 @@ you can get more info at https://github.com/DirectXMan12/k8s-prometheus-adapter
 [root@docker01 prometheus-operator]# kubectl apply -f alertmanager/
 [root@docker01 prometheus-operator]# kubectl get pods -l app=alertmanager
 NAME                  READY     STATUS    RESTARTS   AGE
-alertmanager-main-0   2/2       Running   0          23h
+alertmanager-main-0   2/2       Running   0          1m
 
 [root@docker01 prometheus-operator]# kubectl apply -f prometheus-operator/
 
 [root@docker01 prometheus-operator]# kubectl get pods -l app=prometheus
 NAME               READY     STATUS    RESTARTS   AGE
-prometheus-k8s-0   2/2       Running   4          21h
+prometheus-k8s-0   2/2       Running   0          1h
 
 check status of CustomResourceDefinitions
 
@@ -43,8 +43,8 @@ servicemonitors.monitoring.coreos.com   CustomResourceDefinition.v1beta1.apiexte
 [root@docker01 prometheus-operator]# kubectl apply -f node-exporter/
 [root@docker01 prometheus-operator]# kubectl get pods -n monitoring -l app=node-exporter
 NAME                  READY     STATUS    RESTARTS   AGE
-node-exporter-682cc   1/1       Running   0          1d
-node-exporter-z9fz6   1/1       Running   0          1d
+node-exporter-682cc   1/1       Running   0          1m
+node-exporter-z9fz6   1/1       Running   0          1m
 ```
 
 * Deploy kube-state-metrics
@@ -53,7 +53,7 @@ node-exporter-z9fz6   1/1       Running   0          1d
 
 [root@docker01 prometheus-operator]# kubectl get pods -n monitoring -l app=kube-state-metrics
 NAME                                             READY     STATUS    RESTARTS   AGE
-kube-state-metrics-deployment-7f758c9f4b-f28b8   1/1       Running   0          1d
+kube-state-metrics-deployment-7f758c9f4b-f28b8   1/1       Running   0          1m
 ```
 
 * Deploy metrics servers
@@ -64,17 +64,24 @@ kube-state-metrics-deployment-7f758c9f4b-f28b8   1/1       Running   0          
 
 [root@docker01 prometheus-operator]# kubectl get pods -n kube-system -l k8s-app=metrics-server
 NAME                             READY     STATUS    RESTARTS   AGE
-metrics-server-cb4b857b9-zglxl   1/1       Running   0          1d
+metrics-server-cb4b857b9-zglxl   1/1       Running   0          1m
 
 [root@docker01 prometheus-operator]# kubectl get --raw "/apis/metrics.k8s.io/v1beta1/"
 ```
+* Deploy grafana
+```
+[root@docker01 prometheus-operator]# kubectl apply -f grafana
+[root@docker01 prometheus-operator]# kubectl get pods -l app=grafana
+NAME                       READY     STATUS    RESTARTS   AGE
+grafana-2409838881-x2kv7   1/1       Running   0          1m
 
+```
 * Deploy k8s-prometheus-adapter for custom metrics
 ```
 [root@docker01 prometheus-operator]# kubectl apply -f prometheus
 [root@docker01 prometheus-operator]# kubectl get pods -l k8s-app=prometheus-operator
 NAME                                   READY     STATUS    RESTARTS   AGE
-prometheus-operator-549699ccc6-5kpzn   1/1       Running   0          1d
+prometheus-operator-549699ccc6-5kpzn   1/1       Running   0          1m
 
 [root@docker01 prometheus-operator]# kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/"
 
@@ -86,11 +93,11 @@ kubectl apply -f example/
 
 [root@docker01 prometheus-operator]# kubectl get pods -l app=nginx
 NAME                     READY     STATUS    RESTARTS   AGE
-nginx-76f467f844-64wsf   1/1       Running   0          17m
+nginx-76f467f844-64wsf   1/1       Running   0          1m
 
 [root@docker01 prometheus-operator]# kubectl get hpa nginx
 NAME      REFERENCE          TARGETS          MINPODS   MAXPODS   REPLICAS   AGE
-nginx     Deployment/nginx   7766016 / 800k   1         2         1          13m
+nginx     Deployment/nginx   7766016 / 800k   1         2         1          1m
 
 [root@docker01 prometheus-operator]# kubectl get hpa nginx -o yaml
 apiVersion: autoscaling/v1
@@ -99,14 +106,14 @@ metadata:
   annotations:
     autoscaling.alpha.kubernetes.io/conditions: '[{"type":"AbleToScale","status":"False","lastTransitionTime":"2018-01-31T05:20:26Z","reason":"BackoffBoth","message":"the
       time since the previous scale is still within both the downscale and upscale
-      forbidden windows"},{"type":"ScalingActive","status":"True","lastTransitionTime":"2018-01-31T05:05:56Z","reason":"ValidMetricFound","message":"the
+      forbidden windows"},{"type":"ScalingActive","status":"True","lastTransitionTime":"2018-01-31T05:15:56Z","reason":"ValidMetricFound","message":"the
       HPA was able to succesfully calculate a replica count from pods metric memory_usage_bytes"},{"type":"ScalingLimited","status":"True","lastTransitionTime":"2018-01-31T05:18:56Z","reason":"TooManyReplicas","message":"the
       desired replica count is more than the maximum replica count"}]'
     autoscaling.alpha.kubernetes.io/current-metrics: '[{"type":"Pods","pods":{"metricName":"memory_usage_bytes","currentAverageValue":"7741440"}}]'
     autoscaling.alpha.kubernetes.io/metrics: '[{"type":"Pods","pods":{"metricName":"memory_usage_bytes","targetAverageValue":"800k"}}]'
     kubectl.kubernetes.io/last-applied-configuration: |
       {"apiVersion":"autoscaling/v2beta1","kind":"HorizontalPodAutoscaler","metadata":{"annotations":{},"name":"nginx","namespace":"default"},"spec":{"maxReplicas":2,"metrics":[{"pods":{"metricName":"memory_usage_bytes","targetAverageValue":800000},"type":"Pods"}],"minReplicas":1,"scaleTargetRef":{"apiVersion":"apps/v1beta1","kind":"Deployment","name":"nginx"}}}
-  creationTimestamp: 2018-01-31T05:05:31Z
+  creationTimestamp: 2018-01-31T05:15:31Z
   name: nginx
   namespace: default
   resourceVersion: "205330"
