@@ -14,6 +14,10 @@ you can get more info at https://github.com/DirectXMan12/k8s-prometheus-adapter
 --proxy-client-cert-file=<path to aggregator proxy cert>
 --proxy-client-key-file=<path to aggregator proxy key>
 ```
+* Enable the following kube-controller flags.
+```
+--horizontal-pod-autoscaler-use-rest-clients=true
+```
 
 * Deploy prometheus using promethues operator
   The Prometheus Operator for Kubernetes provides easy monitoring definitions for Kubernetes services and deployment and    management of Prometheus instances, check out more https://github.com/coreos/prometheus-operator
